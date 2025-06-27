@@ -294,7 +294,7 @@ async def get_system_config(
             "auth": bool(settings.SUPABASE_URL),
             "ai": bool(settings.OPENAI_API_KEY or settings.ANTHROPIC_API_KEY),
             "payments": bool(settings.STRIPE_SECRET_KEY or settings.LEMONSQUEEZY_API_KEY),
-            "email": bool(settings.RESEND_API_KEY)
+            "email": False  # Email disabled - see docs/EMAIL_INTEGRATION.md
         },
         "admin_emails_count": len(settings.ADMIN_EMAILS) if isinstance(settings.ADMIN_EMAILS, list) else 0,
         "cors_origins": settings.CORS_ORIGINS

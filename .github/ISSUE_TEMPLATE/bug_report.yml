@@ -1,0 +1,118 @@
+name: 🐛 Bug Report
+description: Report a bug or issue with Prompt-Stack
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the details below to help us resolve it quickly.
+
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Operating Mode
+      description: Which mode were you using when the bug occurred?
+      options:
+        - Demo Mode (no API keys configured)
+        - Production Mode (API keys configured)
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe what happened...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Step-by-step instructions to reproduce the bug
+      placeholder: |
+        1. Run `./setup.sh`
+        2. Visit http://localhost:3000
+        3. Click on '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: I expected...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+      placeholder: Instead, what happened was...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and Diagnostics
+      description: Please run `./scripts/diagnose.sh` and paste the output here
+      placeholder: |
+        Paste the output of ./scripts/diagnose.sh here
+        Also include any relevant browser console errors or Docker logs
+      render: shell
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - macOS
+        - Windows
+        - Linux (Ubuntu)
+        - Linux (Other)
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: docker-version
+    attributes:
+      label: Docker Version
+      description: Run `docker --version` to get this
+      placeholder: "Docker version 24.0.6"
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: Any relevant environment configuration (sanitized, no secrets!)
+      placeholder: |
+        Node.js version:
+        Python version:
+        Any custom environment variables (remove actual values):
+        DEEPSEEK_API_KEY=[configured/not configured]
+        SUPABASE_URL=[configured/not configured]
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please verify these before submitting
+      options:
+        - label: I've run `./scripts/diagnose.sh` and included the output
+          required: true
+        - label: I've checked the browser console for errors
+          required: false
+        - label: I've tried with a fresh `./setup.sh` run
+          required: false
+        - label: I've checked existing issues for duplicates
+          required: true

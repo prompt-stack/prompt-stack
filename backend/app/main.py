@@ -113,7 +113,7 @@ async def root():
             "ai": bool(settings.OPENAI_API_KEY or settings.ANTHROPIC_API_KEY or settings.GEMINI_API_KEY or settings.DEEPSEEK_API_KEY),
             "rate_limiting": True,
             "vector_db": bool(settings.SUPABASE_URL and settings.SUPABASE_URL != "demo"),  # pgvector comes with Supabase
-            "email": bool(settings.RESEND_API_KEY),
+            "email": False,  # Email disabled - see docs/EMAIL_INTEGRATION.md
             "payments": bool(settings.STRIPE_SECRET_KEY or settings.LEMONSQUEEZY_API_KEY)
         }
     }

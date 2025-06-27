@@ -187,7 +187,7 @@ ensure-env-files:
 		echo "LEMONSQUEEZY_WEBHOOK_SECRET=" >> backend/.env; \
 		echo "" >> backend/.env; \
 		echo "# Email" >> backend/.env; \
-		echo "RESEND_API_KEY=" >> backend/.env; \
+		echo "# RESEND_API_KEY=" >> backend/.env; \
 		echo "" >> backend/.env; \
 		echo "# For exposing local dev to internet (optional)" >> backend/.env; \
 		echo "# From ngrok.com dashboard" >> backend/.env; \

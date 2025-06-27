@@ -52,6 +52,12 @@ yarn-error.log*
 *.swp
 *.swo
 
+# Claude Code
+.claude/
+
+# Internal development artifacts (moved from docs/)
+.internal-docs/
+
 # Docker
 docker-compose.override.yml
 

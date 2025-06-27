@@ -1,0 +1,146 @@
+name: 🆘 Setup Help
+description: Get help with setup, configuration, or getting started
+title: "[Help]: "
+labels: ["help", "setup"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Need help getting Prompt-Stack up and running? We're here to help! 
+        
+        **Quick Self-Help:**
+        1. Try running `./scripts/diagnose.sh` first
+        2. Check [TROUBLESHOOTING.md](https://github.com/rudijetson/prompt-stack/blob/main/docs/TROUBLESHOOTING.md)
+        3. Review [GETTING_STARTED.md](https://github.com/rudijetson/prompt-stack/blob/main/docs/GETTING_STARTED.md)
+
+  - type: dropdown
+    id: setup-stage
+    attributes:
+      label: Setup Stage
+      description: Where are you in the setup process?
+      options:
+        - Initial clone and setup (./setup.sh)
+        - Demo mode working, adding real services
+        - Adding API keys (AI providers)
+        - Adding authentication (Supabase)
+        - Adding payments
+        - Deployment to production
+        - Other configuration issue
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: What do you need help with?
+      description: Describe your specific question or issue
+      placeholder: |
+        I'm trying to [what you're trying to do] but [what's not working]...
+        I followed [which steps] but [what happened instead]...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-tried
+    attributes:
+      label: What have you already tried?
+      description: List the steps you've already attempted
+      placeholder: |
+        1. Ran ./setup.sh - [result]
+        2. Added API keys to .env - [result]
+        3. Restarted Docker - [result]
+        4. Checked logs - [result]
+
+  - type: textarea
+    id: error-messages
+    attributes:
+      label: Error Messages
+      description: Copy and paste any error messages you're seeing
+      placeholder: |
+        Browser console errors:
+        [paste here]
+        
+        Docker logs:
+        [paste here]
+        
+        Terminal output:
+        [paste here]
+      render: shell
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostic Output
+      description: Please run `./scripts/diagnose.sh` and paste the output
+      placeholder: "Paste the full output of ./scripts/diagnose.sh here"
+      render: shell
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - macOS
+        - Windows (WSL)
+        - Windows (Native)
+        - Linux (Ubuntu)
+        - Linux (Other)
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: docker-version
+    attributes:
+      label: Docker Version
+      description: Run `docker --version`
+      placeholder: "Docker version 24.0.6"
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Configuration
+      description: What have you configured? (Remove actual API key values!)
+      placeholder: |
+        Backend .env file has:
+        SUPABASE_URL=[yes/no]
+        OPENAI_API_KEY=[yes/no]
+        DEEPSEEK_API_KEY=[yes/no]
+        
+        Frontend .env.local has:
+        NEXT_PUBLIC_SUPABASE_URL=[yes/no]
+        
+        Ports in use:
+        Frontend: 3000 or [custom port]
+        Backend: 8000 or [custom port]
+
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: Urgency Level
+      description: How urgent is this for you?
+      options:
+        - Learning/exploring - no rush
+        - Working on a project - would like help soon
+        - Deadline approaching - need help quickly
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      description: Please verify these before asking for help
+      options:
+        - label: I've run `./scripts/diagnose.sh` and included the output
+          required: true
+        - label: I've checked the TROUBLESHOOTING.md guide
+          required: true
+        - label: I've tried a fresh `./setup.sh` run
+          required: false
+        - label: I've verified Docker is running properly
+          required: true
+        - label: I've checked existing issues for similar problems
+          required: true

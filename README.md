@@ -1,5 +1,11 @@
 # Prompt-Stack
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://www.docker.com/)
+[![AI](https://img.shields.io/badge/AI-native-green.svg)](https://github.com/rudijetson/prompt-stack)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-latest-009688.svg)](https://fastapi.tiangolo.com/)
+
 **The Rails of AI Development** - Ship production-ready AI applications in 18 minutes, not months.
 
 🚀 **Real-World Tested**: 100% setup success rate with live users  
@@ -46,7 +52,7 @@ open http://localhost:3000
 
 Each step builds on the previous one. Start simple, add features as needed.
 
-📖 See the [detailed quick start guide](docs/QUICKSTART.md) for step-by-step instructions.
+📖 See the [detailed quick start guide](docs/GETTING_STARTED.md) for step-by-step instructions.
 
 ## ✨ Features
 
@@ -164,11 +170,18 @@ railway up  # or use render.yaml
 
 ## 📖 Documentation
 
-- [Environment Setup](docs/ENVIRONMENT_SETUP.md)
-- [API Documentation](http://localhost:8000/docs)
-- [Deployment Guide](docs/deployment/)
-- [Payment Setup](docs/payment-setup/)
-- [Changelog](CHANGELOG.md)
+- [Getting Started](docs/GETTING_STARTED.md) - Complete setup guide
+- [Architecture Overview](docs/ARCHITECTURE_OVERVIEW.md) - System design
+- [Authentication Guide](docs/AUTHENTICATION_GUIDE.md) - Auth implementation
+- [AI/LLM Integration](docs/AI_LLM_INTEGRATION.md) - AI features
+- [Development Patterns](docs/DEVELOPMENT_PATTERNS.md) - Code patterns
+- [Deployment Guide](docs/DEPLOYMENT_GUIDE.md) - Production deployment
+- [Security Guide](docs/SECURITY_GUIDE.md) - Security best practices
+- [Email Integration](docs/EMAIL_INTEGRATION.md) - Email setup (optional)
+- [Payment Integration](docs/PAYMENT_INTEGRATION.md) - Payment setup (optional)
+- [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues
+- [API Documentation](http://localhost:8000/docs) - Interactive API docs
+- [Changelog](CHANGELOG.md) - Release history
 
 ## 🧪 Testing
 
@@ -247,11 +260,19 @@ These work without any configuration:
 
 ## 🤝 Contributing
 
-Contributions welcome! Please read our contributing guidelines.
+Contributions welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md).
+
+- [Bug Reports](.github/ISSUE_TEMPLATE/bug_report.yml) - Report issues
+- [Feature Requests](.github/ISSUE_TEMPLATE/feature_request.yml) - Suggest improvements  
+- [Setup Help](.github/ISSUE_TEMPLATE/setup_help.yml) - Get assistance
 
 ## 📄 License
 
-MIT License - use this template for anything!
+MIT License - use this template for anything! See [LICENSE](LICENSE) for details.
+
+## 👥 Authors
+
+See [AUTHORS.md](AUTHORS.md) for contributors and acknowledgments.
 
 ---
 

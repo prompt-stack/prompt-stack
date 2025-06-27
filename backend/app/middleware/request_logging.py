@@ -59,7 +59,6 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
                 "Request failed",
                 error=str(exc),
                 duration_ms=round(duration * 1000, 2),
-                exc_info=True,
             )
             
             # Re-raise the exception

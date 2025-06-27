@@ -38,8 +38,8 @@ class Settings(BaseSettings):
     LEMONSQUEEZY_WEBHOOK_SECRET: str = ""
     LEMONSQUEEZY_MEMBER_DISCOUNT_CODE: str = ""
     
-    # Email
-    RESEND_API_KEY: str = ""
+    # Email (disabled by default - see docs/EMAIL_INTEGRATION.md)
+    # RESEND_API_KEY: str = ""
     
     # Admin Configuration
     ADMIN_EMAILS: Union[List[str], str] = []  # List of emails that should be admins

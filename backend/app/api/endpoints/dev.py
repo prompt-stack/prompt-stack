@@ -8,7 +8,7 @@ ENDPOINTS:
 - GET /health - Comprehensive health check
 - POST /reset-demo - Reset demo data to initial state
 - GET /config - Show current configuration (sanitized)
-- POST /test-email - Test email sending
+- POST /test-email - Test email sending (disabled)
 - GET /errors/test - Test error handling
 
 COMMON AI PROMPTS:
@@ -191,42 +191,11 @@ async def get_config():
     return success_response(config_data)
 
 
-@router.post("/test-email", response_model=StandardResponse)
-async def test_email(to_email: str = "test@example.com"):
-    """
-    Test email sending functionality.
-    
-    Sends a test email to verify email configuration.
-    Only works in development mode.
-    
-    Request body:
-    {
-        "to_email": "user@example.com"
-    }
-    
-    Example response:
-    {
-        "success": true,
-        "data": {
-            "message": "Test email sent successfully",
-            "to": "user@example.com"
-        }
-    }
-    """
-    # Only allow in development mode
-    if settings.ENVIRONMENT != "development":
-        forbidden("This endpoint is only available in development mode")
-    
-    # In a real implementation, you would send an actual email here
-    # For now, we'll simulate it
-    email_data = {
-        "message": "Test email sent successfully (simulated)",
-        "to": to_email,
-        "subject": "PromptStack Test Email",
-        "timestamp": datetime.utcnow().isoformat() + "Z"
-    }
-    
-    return success_response(email_data)
+# Email functionality disabled - see docs/EMAIL_INTEGRATION.md to enable
+# @router.post("/test-email", response_model=StandardResponse)
+# async def test_email(to_email: str = "test@example.com"):
+#     """Email testing endpoint - currently disabled"""
+#     pass
 
 
 @router.get("/errors/test/{error_type}", response_model=StandardResponse)

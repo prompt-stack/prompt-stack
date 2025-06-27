@@ -105,12 +105,8 @@ class CapabilityMatrix:
         else:
             capabilities["payments"] = ServiceStatus.DEMO
         
-        # Email capability
-        capabilities["email"] = (
-            ServiceStatus.PRODUCTION 
-            if self._is_valid_key(settings.RESEND_API_KEY) 
-            else ServiceStatus.DEMO
-        )
+        # Email capability (disabled - see docs/EMAIL_INTEGRATION.md)
+        capabilities["email"] = ServiceStatus.DEMO
         
         # Vector search (uses Supabase pgvector)
         capabilities["vector_search"] = capabilities["database"]

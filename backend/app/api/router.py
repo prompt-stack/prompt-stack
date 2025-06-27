@@ -18,7 +18,7 @@ TO ADD NEW ENDPOINTS:
 
 from fastapi import APIRouter
 from app.core.config import settings
-from app.api.endpoints import auth, llm, vectordb, dev, upload, health, payments_demo, system, admin
+from app.api.endpoints import auth, llm, vectordb, dev, upload, health, payments, system, admin
 
 api_router = APIRouter()
 
@@ -34,13 +34,10 @@ api_router.include_router(admin.router, prefix="/admin", tags=["Admin"])
 api_router.include_router(llm.router, prefix="/llm", tags=["LLM Services"])
 api_router.include_router(vectordb.router, prefix="/vectordb", tags=["Vector Database"])
 api_router.include_router(upload.router, prefix="/upload", tags=["File Upload"])
-# Payment demo endpoints (work without configuration)
-api_router.include_router(payments_demo.router, prefix="/payments-demo", tags=["Payment Demo"])
+# Payment status endpoints (configuration checking only)
+api_router.include_router(payments.router, prefix="/payments", tags=["Payments"])
 
-# Full payment endpoints (require configuration)
-# api_router.include_router(payments.router, prefix="/payments", tags=["Payments - Stripe"])
-# api_router.include_router(payments_ls.router, prefix="/payments", tags=["Payments - Lemon Squeezy"])
-# api_router.include_router(payment_comparison.router, prefix="/payments", tags=["Payment Comparison"])
+# Full payment functionality disabled - see docs/PAYMENT_INTEGRATION.md to enable
 
 # Development endpoints - only in dev mode
 if settings.ENVIRONMENT == "development":
