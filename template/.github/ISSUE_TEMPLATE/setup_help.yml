@@ -10,8 +10,8 @@ body:
         
         **Quick Self-Help:**
         1. Try running `./scripts/diagnose.sh` first
-        2. Check [TROUBLESHOOTING.md](https://github.com/rudijetson/prompt-stack/blob/main/docs/TROUBLESHOOTING.md)
-        3. Review [GETTING_STARTED.md](https://github.com/rudijetson/prompt-stack/blob/main/docs/GETTING_STARTED.md)
+        2. Check [TROUBLESHOOTING.md](https://github.com/prompt-stack/prompt-stack/blob/main/template/docs/TROUBLESHOOTING.md)
+        3. Review [GETTING_STARTED.md](https://github.com/prompt-stack/prompt-stack/blob/main/template/docs/GETTING_STARTED.md)
 
   - type: dropdown
     id: setup-stage

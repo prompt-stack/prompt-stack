@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://www.docker.com/)
-[![AI](https://img.shields.io/badge/AI-native-green.svg)](https://github.com/rudijetson/prompt-stack)
+[![AI](https://img.shields.io/badge/AI-native-green.svg)](https://github.com/prompt-stack/prompt-stack)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-latest-009688.svg)](https://fastapi.tiangolo.com/)
 

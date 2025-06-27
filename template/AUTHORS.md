@@ -2,7 +2,7 @@
 
 ## Core Team
 
-**Rudi Jetson** - *Creator & Lead Developer*
+**Brandon Z. Hoff** - *Creator & Lead Developer*
 - Project architecture and design
 - Backend development (FastAPI)
 - Frontend development (Next.js)
