@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2025-06-27
+
+### 🔒 Security & Quality Improvements
+- **CRITICAL**: Removed hardcoded JWT secrets in demo mode
+- **FIXED**: Updated python-multipart from 0.0.9 to 0.0.12 (CVE-2024-37891)
+- **ENABLED**: TypeScript strict mode for better type safety
+- **ADDED**: React error boundary to prevent white screen crashes
+- **ENHANCED**: API client with timeout, retry, and cancellation support
+- **IMPROVED**: Rate limiting with Redis support when available
+- **ADDED**: Input validation utilities to prevent XSS/injection
+- **ADDED**: Basic test coverage for auth and LLM endpoints
+
+### 📊 Developer Experience
+- **ADDED**: Comprehensive developer assessment (DEVELOPER_ASSESSMENT.md)
+- **INSIGHT**: Identified as mid-to-senior level codebase with strong DX focus
+- **VALIDATED**: Security posture improved without adding bloat
+
 ## [1.1.0] - 2025-06-27
 
 ### 🚨 Critical Fixes
