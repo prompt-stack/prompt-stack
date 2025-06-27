@@ -13,8 +13,8 @@ You only need:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/prompt-stack.git
-cd prompt-stack
+git clone https://github.com/rudijetson/prompt-stack-temp.git
+cd prompt-stack-temp
 ```
 
 ### 2. Run Setup Script
@@ -83,10 +83,21 @@ If you see any issues:
 
 ## Next Steps
 
-1. Explore the demo at http://localhost:3000
-2. Try the API at http://localhost:8000/docs
-3. When ready, add real API keys to `.env` files
-4. Check out the [full documentation](../README.md)
+1. **Explore the demo** at http://localhost:3000
+2. **Try the API** at http://localhost:8000/docs
+3. **Add real features** when ready:
+   ```bash
+   # Add Supabase (auth + database)
+   ./setup.sh supabase
+   
+   # Add AI providers
+   ./setup.sh ai
+   ```
+4. **⚠️ IMPORTANT**: After adding API keys and restarting Docker:
+   - **Log out and log back in** to refresh your authentication tokens
+   - This is required for your session to work with the new configuration
+
+5. Check out the [full documentation](../README.md)
 
 ---
 

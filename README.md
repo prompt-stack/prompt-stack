@@ -106,13 +106,20 @@ NEXT_PUBLIC_SUPABASE_URL=your_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
 ```
 
-> ⚠️ **IMPORTANT: Environment Variable Changes**
+> ⚠️ **CRITICAL: Environment Variable Changes**
 > 
-> After changing ANY environment variables, you MUST do a **FULL RESTART**:
+> After changing ANY environment variables:
+> 
+> **1. FULL RESTART Required:**
 > ```bash
 > docker-compose down && docker-compose up -d
 > ```
-> Simple `docker-compose restart` is NOT sufficient - environment variables are loaded at container creation time!
+> (Simple `restart` is NOT sufficient - env vars load at container creation!)
+> 
+> **2. REFRESH Authentication:**
+> - If you're logged into the app, **log out and log back in**
+> - This refreshes your authentication tokens with the new configuration
+> - **Required after adding API keys or changing Supabase settings**
 
 ## 📝 Common Commands
 

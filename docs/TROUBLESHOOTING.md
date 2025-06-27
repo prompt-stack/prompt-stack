@@ -4,11 +4,22 @@
 
 ### 🔴 "I added API keys but can't test my LLMs!"
 
-**Cause**: The `/api/llm/generate` endpoint requires authentication. Without Supabase, you can't create authenticated sessions.
+**Common Cause**: Authentication token needs refresh after configuration changes.
 
 **Solutions**:
 
-1. **Add Supabase credentials first**:
+1. **🎯 MOST COMMON FIX - Refresh Authentication**:
+   - **Log out of the application**
+   - **Log back in** 
+   - This refreshes your authentication tokens with the new configuration
+   - **Required after adding API keys or changing Supabase settings**
+
+2. **Verify Docker restart** (required for env changes):
+   ```bash
+   docker-compose down && docker-compose up -d
+   ```
+
+3. **Add Supabase credentials first** (required for auth):
    ```bash
    # In backend/.env
    SUPABASE_URL=https://xxx.supabase.co
@@ -16,17 +27,11 @@
    SUPABASE_SERVICE_KEY=xxx
    ```
 
-2. **Use the demo endpoint** (always returns mock data):
+4. **Use demo endpoint for testing** (no auth required):
    ```bash
    curl -X POST http://localhost:8000/api/llm/generate-demo \
      -H "Content-Type: application/json" \
      -d '{"prompt": "Hello", "model": "gpt-4"}'
-   ```
-
-3. **Run in full demo mode**:
-   ```bash
-   # Set DEMO_MODE=true in backend/.env
-   # This makes everything use mock data
    ```
 
 ### 🔴 "Environment variables not loading"

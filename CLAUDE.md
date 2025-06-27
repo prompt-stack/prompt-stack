@@ -26,6 +26,19 @@ This file helps AI assistants understand and work with this codebase effectively
 **"Add AI chat" → Use existing LLM service from `backend/app/services/llm/`**
 **"Setup payments" → Point to existing payment endpoints**
 
+## 🚨 CRITICAL Setup Knowledge
+
+**Most Important Discovery**: After users add API keys and restart Docker, they MUST log out and log back in to refresh their authentication tokens. This is the #1 "gotcha" that causes confusion.
+
+### When to Mention Auth Refresh:
+- User adds API keys to .env files
+- User restarts Docker containers  
+- User reports "API keys not working" or "authentication errors"
+- User changes Supabase configuration
+
+### The Pattern:
+1. Add API keys → 2. Docker restart → 3. **Log out/in** → 4. Features work
+
 ## Project Overview
 
 Prompt-Stack is a full-stack template designed for rapid development with AI assistance. It includes authentication, payments, AI integration, and vector search out of the box.

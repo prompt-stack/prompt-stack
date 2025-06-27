@@ -1,7 +1,18 @@
 # AI Guide: Prompt-Stack
 
 ## Repository Overview
-This is a full-stack AI application template with authentication, multiple LLM providers, and vector search capabilities.
+This is a production-ready, AI-native full-stack template featuring:
+- **Multi-LLM Support**: OpenAI, Anthropic, Gemini, DeepSeek
+- **Enterprise Auth**: Supabase + JWT + Role-based access control
+- **AI-Native Workflow**: Automated code auditing, scaffolds, quality gates
+- **Real-time Setup**: ~20 minutes from clone to fully functional AI app
+
+## 🎯 Real-World Setup Experience
+Based on actual user testing, expect this workflow:
+1. **Clone + Demo**: 3-5 minutes → Working app with mock data
+2. **Add Supabase**: 5-10 minutes → Real auth + database
+3. **Add LLM Providers**: 5 minutes → Live AI integration
+4. **Total Time**: ~20 minutes to production-ready AI application
 
 ## Quick Prompts
 
@@ -111,6 +122,31 @@ async def get_user_profile(user_id: str):
 - **Database Tables**: Add migrations + RLS policies
 - **UI Components**: Follow existing patterns in `/components/ui/`
 
+## 🚨 Critical Setup Discovery
+
+**Most Important Real-World Finding**: After adding API keys and restarting Docker, users MUST log out and log back in to refresh their authentication tokens.
+
+### Authentication Token Refresh Pattern
+```
+1. Add API keys to .env files
+2. Full Docker restart: docker-compose down && docker-compose up -d
+3. 🎯 CRITICAL: Log out of the application
+4. Log back in to get fresh tokens
+5. LLM/API features now work properly
+```
+
+This pattern applies to:
+- Adding any LLM provider API keys
+- Changing Supabase configuration
+- Modifying authentication settings
+- Any environment variable changes affecting auth
+
+### Why This Happens
+- JWT tokens are cached in localStorage
+- New configuration invalidates existing tokens
+- Frontend needs fresh tokens that match new backend config
+- Simple restart doesn't refresh client-side auth state
+
 ## Security Checklist
 
 - [ ] New routes are properly authenticated
@@ -119,6 +155,7 @@ async def get_user_profile(user_id: str):
 - [ ] No secrets in frontend code
 - [ ] Input validation on all endpoints
 - [ ] CORS properly configured
+- [ ] **Auth refresh documented for config changes** ✨ NEW
 
 ## Return Format
 
