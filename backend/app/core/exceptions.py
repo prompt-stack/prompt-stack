@@ -154,13 +154,27 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 async def general_exception_handler(request: Request, exc: Exception) -> JSONResponse:
     """Handle general exceptions with consistent response format."""
+    import logging
+    import traceback
+    from app.core.config import settings
+    
+    # Log the full error for debugging
+    logger = logging.getLogger(__name__)
+    logger.error(f"Unhandled exception: {str(exc)}")
+    logger.error(traceback.format_exc())
+    
+    # In development, include more details
+    error_detail = "Internal server error"
+    if settings.ENVIRONMENT == "development":
+        error_detail = f"Internal server error: {str(exc)}"
+    
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content={
             "success": False,
             "data": None,
             "message": None,
-            "error": "Internal server error",
+            "error": error_detail,
             "code": "INTERNAL_ERROR"
         }
     )

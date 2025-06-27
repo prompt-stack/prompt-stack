@@ -40,7 +40,7 @@ export const emailCaptureService = {
       }
       
       // Check rate limiting
-      if (!emailRateLimiter.isAllowed(email)) {
+      if (!emailRateLimiter.canAttempt(email)) {
         console.warn('Rate limit exceeded for email:', email)
         return { success: false, message: 'Too many attempts. Please try again later.' }
       }

@@ -1,5 +1,5 @@
 -- Combined Supabase migrations
--- Generated: Thu Jun 26 18:18:54 EDT 2025
+-- Generated: Thu Jun 26 20:20:49 EDT 2025
 -- Run this file in Supabase SQL Editor
 
 

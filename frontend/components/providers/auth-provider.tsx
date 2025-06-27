@@ -13,6 +13,7 @@ interface AuthContextType {
   signUp: (email: string, password: string) => Promise<{ error: Error | null }>
   signOut: () => Promise<{ error: Error | null }>
   isDemoMode: boolean
+  getAuthToken: () => Promise<string | null>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -60,7 +61,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       } else if (supabase) {
         // Real Supabase mode
-        console.log('Supabase mode - checking for stored session')
+        // Checking for stored session
         
         // Check for stored session first
         if (typeof window !== 'undefined') {
@@ -70,7 +71,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           if (storedUser) {
             try {
               const user = JSON.parse(storedUser)
-              console.log('Found stored user:', user.email)
+              // Found stored user
               setUser(user)
             } catch (e) {
               console.error('Error parsing stored user:', e)
@@ -84,7 +85,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
           }
         }).then(res => {
-          console.log('Supabase REST API test:', res.status)
+          // API test successful
         }).catch(err => {
           console.error('Supabase REST API error:', err)
         })
@@ -243,8 +244,46 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  const getAuthToken = async (): Promise<string | null> => {
+    if (isDemoMode) {
+      return `demo-token-${user?.email || 'anonymous'}`
+    }
+    
+    // First try to get token from localStorage (faster and avoids hanging)
+    if (typeof window !== 'undefined') {
+      try {
+        const storedToken = localStorage.getItem('supabase.auth.token')
+        if (storedToken) {
+          const tokenData = JSON.parse(storedToken)
+          return tokenData.access_token || null
+        }
+      } catch (error) {
+        // No stored token, fall through to Supabase client
+      }
+    }
+    
+    // Fallback to Supabase client with timeout
+    const supabase = getSupabaseClient()
+    if (supabase) {
+      try {
+        // Add timeout to prevent hanging
+        const sessionPromise = supabase.auth.getSession()
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Session timeout')), 5000)
+        )
+        
+        const { data: { session } } = await Promise.race([sessionPromise, timeoutPromise]) as any
+        return session?.access_token || null
+      } catch (error) {
+        return null
+      }
+    }
+    
+    return null
+  }
+
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, isDemoMode }}>
+    <AuthContext.Provider value={{ user, loading, signIn, signUp, signOut, isDemoMode, getAuthToken }}>
       {children}
     </AuthContext.Provider>
   )

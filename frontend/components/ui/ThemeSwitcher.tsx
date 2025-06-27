@@ -14,7 +14,7 @@ const themeColors: { value: ThemeColor; label: string; class: string }[] = [
 ]
 
 export function ThemeSwitcher() {
-  const { theme, toggleTheme, setThemeColor } = useTheme()
+  const { theme, themeColor, toggleTheme, setThemeColor } = useTheme()
   const [showColorPicker, setShowColorPicker] = useState(false)
   const pickerRef = useRef<HTMLDivElement>(null)
 
@@ -32,7 +32,7 @@ export function ThemeSwitcher() {
   }, [showColorPicker])
 
   const getModeIcon = () => {
-    switch (theme.mode) {
+    switch (theme) {
       case 'light':
         return <Sun className="w-5 h-5" />
       case 'dark':
@@ -43,7 +43,7 @@ export function ThemeSwitcher() {
   }
 
   const getModeLabel = () => {
-    switch (theme.mode) {
+    switch (theme) {
       case 'light':
         return 'Light mode'
       case 'dark':
@@ -64,7 +64,7 @@ export function ThemeSwitcher() {
       >
         <AnimatePresence mode="wait">
           <motion.div
-            key={theme.mode}
+            key={theme}
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             exit={{ scale: 0, rotate: 180 }}
@@ -108,7 +108,7 @@ export function ThemeSwitcher() {
                     className={`relative w-8 h-8 rounded-lg ${color.class} hover:scale-110 transition-transform`}
                     title={color.label}
                   >
-                    {theme.color === color.value && (
+                    {themeColor === color.value && (
                       <Check className="w-4 h-4 text-white absolute inset-0 m-auto" />
                     )}
                   </button>

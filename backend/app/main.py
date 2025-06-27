@@ -8,6 +8,8 @@ from slowapi.errors import RateLimitExceeded
 from app.api.router import api_router
 from app.core.config import settings
 from app.core.rate_limiter import limiter
+from app.core.logging import setup_logging
+from app.middleware import RequestLoggingMiddleware
 from app.core.exceptions import (
     http_exception_handler,
     validation_exception_handler,
@@ -16,6 +18,9 @@ from app.core.exceptions import (
     AppException
 )
 from app.models.common import StandardResponse, create_success_response
+
+# Setup logging
+setup_logging()
 
 app = FastAPI(
     title="PromptStack Backend",
@@ -42,7 +47,34 @@ class OptionsMiddleware(BaseHTTPMiddleware):
         return await call_next(request)
 
 
-# Add OPTIONS middleware first
+# Security headers middleware
+class SecurityHeadersMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        response = await call_next(request)
+        
+        # Security headers for production
+        security_headers = {
+            "X-Content-Type-Options": "nosniff",
+            "X-Frame-Options": "DENY",
+            "X-XSS-Protection": "1; mode=block",
+            "Strict-Transport-Security": "max-age=31536000; includeSubDomains" if settings.ENVIRONMENT == "production" else None,
+            "Referrer-Policy": "strict-origin-when-cross-origin",
+            "X-DNS-Prefetch-Control": "off",
+            "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'",
+            "Permissions-Policy": "geolocation=(), microphone=(), camera=()"
+        }
+        
+        # Add non-None headers
+        for header, value in security_headers.items():
+            if value is not None:
+                response.headers[header] = value
+                
+        return response
+
+
+# Add middleware stack (order matters - last added runs first)
+app.add_middleware(RequestLoggingMiddleware)
+app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(OptionsMiddleware)
 
 # Set up CORS - Expanded configuration

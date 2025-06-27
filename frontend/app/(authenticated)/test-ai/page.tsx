@@ -28,7 +28,7 @@ interface LLMProvider {
 }
 
 export default function DemoPage() {
-  const { user, isDemoMode } = useAuth();
+  const { user, isDemoMode, getAuthToken } = useAuth();
   const [providers, setProviders] = useState<LLMProvider[]>([]);
   const [selectedProvider, setSelectedProvider] = useState('demo');
   const [selectedModel, setSelectedModel] = useState('demo');
@@ -94,6 +94,7 @@ export default function DemoPage() {
 
   async function handleGenerateText(e: React.FormEvent) {
     e.preventDefault();
+    
     setError('');
     setResponse('');
     setLoading(true);
@@ -130,31 +131,12 @@ export default function DemoPage() {
         'Content-Type': 'application/json',
       };
       
-      // Add auth token
-      if (!isDemoMode) {
-        // For real Supabase auth, we need to get the session token
-        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-        const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-        
-        if (supabaseUrl && supabaseAnonKey && supabaseUrl !== 'https://example.supabase.co') {
-          try {
-            const { createClient } = await import('@supabase/supabase-js');
-            const supabase = createClient(supabaseUrl, supabaseAnonKey);
-            const { data: { session } } = await supabase.auth.getSession();
-            
-            if (session?.access_token) {
-              headers['Authorization'] = `Bearer ${session.access_token}`;
-            } else {
-              throw new Error('No active session found');
-            }
-          } catch (error) {
-            console.error('Error getting auth token:', error);
-            throw new Error('Authentication required. Please sign in again.');
-          }
-        }
+      // Add auth token using the auth context
+      const token = await getAuthToken();
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
       } else {
-        // For demo mode, use a simple token
-        headers['Authorization'] = `Bearer demo-token-${user?.email || 'anonymous'}`;
+        throw new Error('No authentication token available. Please sign in again.');
       }
 
       const res = await fetch(`${apiUrl}${endpoint}`, {

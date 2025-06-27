@@ -1,7 +1,148 @@
-# Makefile for Prompt-Stack Skeleton
+# Prompt-Stack Development Makefile
 
-# Environment setup
-.PHONY: first-run
+.PHONY: help dev dev-frontend dev-backend build clean logs test ai-lint ai-audit
+
+# Colors for output
+BLUE := \033[34m
+GREEN := \033[32m
+YELLOW := \033[33m
+RED := \033[31m
+NC := \033[0m
+
+help: ## Show this help message
+	@echo "$(BLUE)Prompt-Stack Development Commands$(NC)"
+	@echo ""
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "$(GREEN)%-20s$(NC) %s\n", $$1, $$2}'
+
+# Development
+dev: ## Start both frontend and backend in development mode
+	@echo "$(BLUE)Starting development environment...$(NC)"
+	docker-compose -f docker-compose.dev.yml up -d
+	@echo "$(GREEN)✓ Services started$(NC)"
+	@echo "Frontend: http://localhost:3000"
+	@echo "Backend:  http://localhost:8000"
+
+dev-frontend: ## Start only frontend
+	docker-compose -f docker-compose.dev.yml up frontend -d
+
+dev-backend: ## Start only backend  
+	docker-compose -f docker-compose.dev.yml up backend -d
+
+stop: ## Stop all services
+	@echo "$(YELLOW)Stopping all services...$(NC)"
+	docker-compose -f docker-compose.dev.yml down
+
+restart: ## Restart all services
+	@echo "$(YELLOW)Restarting services...$(NC)"
+	docker-compose -f docker-compose.dev.yml restart
+
+# Logs
+logs: ## View logs from all services
+	docker-compose -f docker-compose.dev.yml logs -f
+
+logs-backend: ## View backend logs only
+	docker-compose -f docker-compose.dev.yml logs -f backend
+
+logs-frontend: ## View frontend logs only
+	docker-compose -f docker-compose.dev.yml logs -f frontend
+
+# Building
+build: ## Build all containers
+	@echo "$(BLUE)Building containers...$(NC)"
+	docker-compose -f docker-compose.dev.yml build
+
+build-prod: ## Build production containers
+	docker-compose -f docker-compose.prod.yml build
+
+# Cleanup
+clean: ## Clean up containers, volumes, and images
+	@echo "$(YELLOW)Cleaning up Docker resources...$(NC)"
+	docker-compose -f docker-compose.dev.yml down -v --remove-orphans
+	docker system prune -f
+
+clean-all: ## Nuclear cleanup - remove everything
+	@echo "$(RED)WARNING: This will remove ALL Docker data$(NC)"
+	@read -p "Are you sure? (y/N): " confirm && [ "$$confirm" = "y" ]
+	docker system prune -af --volumes
+
+# Testing
+test: ## Run all tests
+	@echo "$(BLUE)Running tests...$(NC)"
+	./scripts/test-api-simple.sh
+
+test-api: ## Test API endpoints
+	./scripts/test-api-comprehensive.sh
+
+# Health checks
+health: ## Check system health
+	@echo "$(BLUE)Checking system health...$(NC)"
+	@curl -s http://localhost:8000/api/health/detailed | jq || echo "Backend not responding"
+	@curl -s http://localhost:3000 > /dev/null && echo "$(GREEN)✓ Frontend responding$(NC)" || echo "$(RED)✗ Frontend not responding$(NC)"
+
+diagnose: ## Run comprehensive diagnostics
+	./scripts/diagnose.sh
+
+# AI Quality Tools
+ai-lint: ## Run AI code quality check on current directory
+	@echo "$(BLUE)Running AI lint check...$(NC)"
+	@if [ -z "$$OPENAI_API_KEY" ]; then \
+		echo "$(RED)Error: OPENAI_API_KEY environment variable required$(NC)"; \
+		exit 1; \
+	fi
+	python3 scripts/ai-lint.py . --output ai-lint-report.json
+	@echo "$(GREEN)✓ AI lint complete. Report: ai-lint-report.json$(NC)"
+
+ai-lint-frontend: ## Run AI lint on frontend only
+	@echo "$(BLUE)Running AI lint on frontend...$(NC)"
+	cd frontend && npm run ai:lint
+
+ai-audit: ## Run full AI audit of codebase
+	@echo "$(BLUE)Running full AI audit...$(NC)"
+	@if [ -z "$$OPENAI_API_KEY" ]; then \
+		echo "$(RED)Error: OPENAI_API_KEY environment variable required$(NC)"; \
+		exit 1; \
+	fi
+	python3 scripts/ai-lint.py . --extensions .py .ts .tsx .js --output ai-audit-full.json
+	@echo "$(GREEN)✓ Full audit complete. Report: ai-audit-full.json$(NC)"
+
+# Database
+migrate: ## Run database migrations (requires manual step)
+	@echo "$(YELLOW)Database migrations must be run manually:$(NC)"
+	@echo "1. Open: https://app.supabase.com/project/nepcpxunchnowolbcsgu/sql/new"
+	@echo "2. Copy contents of: supabase/migrations/all_migrations_combined.sql"
+	@echo "3. Paste and click 'Run'"
+
+setup-db: ## Run database setup script
+	./scripts/setup-database.sh
+
+# Environment
+setup: ## Run initial setup
+	./setup.sh
+
+setup-ai: ## Configure AI providers
+	./setup.sh ai
+
+setup-supabase: ## Configure Supabase
+	./setup.sh supabase
+
+status: ## Show environment status
+	./setup.sh status
+
+# Git hooks (for development)
+install-hooks: ## Install git hooks for AI linting
+	@echo "$(BLUE)Installing git hooks...$(NC)"
+	@echo '#!/bin/bash\nmake ai-lint-frontend' > .git/hooks/pre-commit
+	@chmod +x .git/hooks/pre-commit
+	@echo "$(GREEN)✓ Git hooks installed$(NC)"
+
+# Documentation
+docs: ## Generate documentation
+	@echo "$(BLUE)Documentation available at:$(NC)"
+	@echo "- API Docs: http://localhost:8000/docs"
+	@echo "- Dev Guide: http://localhost:3000/dev-guide"
+	@echo "- AI Guide: ./AI_GUIDE.md"
+	@echo "- Prompts: ./prompts/"
+
 first-run:
 	@echo "Setting up Prompt-Stack Skeleton..."
 	@./setup.sh

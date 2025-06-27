@@ -15,10 +15,7 @@ export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, loading, signOut, isDemoMode } = useAuth();
   
-  // Debug logging
-  useEffect(() => {
-    console.log('Navigation - User state:', user?.email, 'Loading:', loading, 'isDemoMode:', isDemoMode);
-  }, [user, loading, isDemoMode]);
+  // Remove debug logging for production
 
   async function handleSignOut() {
     try {
