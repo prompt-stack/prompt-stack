@@ -2,6 +2,8 @@ from fastapi import APIRouter, HTTPException, Depends
 from typing import Dict, Any, Optional
 from pydantic import BaseModel, EmailStr
 import uuid
+import os
+import secrets
 from datetime import datetime, timedelta
 import jwt
 
@@ -150,8 +152,8 @@ async def demo_sign_in(request: SignInRequest):
         "exp": datetime.utcnow() + timedelta(days=7)
     }
     
-    # Use a static secret for demo mode
-    demo_secret = "demo-secret-key-not-for-production"
+    # Use environment variable or generate a secure secret
+    demo_secret = os.getenv("DEMO_JWT_SECRET", secrets.token_urlsafe(32))
     token = jwt.encode(token_data, demo_secret, algorithm="HS256")
     
     return {

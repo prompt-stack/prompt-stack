@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Navigation } from '@/components/layout/navigation';
 import { AuthProvider } from '@/components/providers/auth-provider';
+import { ErrorBoundary } from '@/components/error-boundary';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,12 +34,14 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} min-h-screen bg-background`}>
-        <AuthProvider>
-          <Navigation />
-          <main className="flex-1 pt-0">
-            {children}
-          </main>
-        </AuthProvider>
+        <ErrorBoundary>
+          <AuthProvider>
+            <Navigation />
+            <main className="flex-1 pt-0">
+              {children}
+            </main>
+          </AuthProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

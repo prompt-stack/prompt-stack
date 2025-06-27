@@ -8,6 +8,8 @@ from typing import Optional, Dict, Any
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 import jwt
+import os
+import secrets
 from datetime import datetime
 
 from app.core.config import settings
@@ -55,7 +57,7 @@ async def get_current_user(
             # Validate demo token
             payload = jwt.decode(
                 token,
-                "demo-secret-key-not-for-production",
+                os.getenv("DEMO_JWT_SECRET", secrets.token_urlsafe(32)),
                 algorithms=["HS256"]
             )
             

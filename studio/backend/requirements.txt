@@ -6,7 +6,7 @@ anthropic==0.18.*
 google-generativeai==0.8.*
 pydantic==2.6.*
 pydantic-settings==2.1.*
-python-multipart==0.0.9
+python-multipart==0.0.12
 numpy==1.26.*
 email-validator==2.1.*
 qdrant-client==1.5.*
