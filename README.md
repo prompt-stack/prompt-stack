@@ -1,4 +1,4 @@
-# prompt-stack: The AI Development Studio
+# prompt-stack: Professional Vibe Coding Studio
 
 > **Everything you need to build and ship AI products. From prototype to production in minutes.**
 
