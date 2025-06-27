@@ -41,7 +41,7 @@ This file helps AI assistants understand and work with this codebase effectively
 
 ## Project Overview
 
-Prompt-Stack is a full-stack template designed for rapid development with AI assistance. It includes authentication, payments, AI integration, and vector search out of the box.
+prompt-stack is The AI Development Studio - a complete environment for building and shipping AI products. It includes authentication, payments, AI integration, and vector search out of the box.
 
 ## 📁 Build Locations Guide
 

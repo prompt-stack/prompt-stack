@@ -1,6 +1,6 @@
-# Prompt-Stack
+# prompt-stack: The AI Development Studio
 
-> **The AI-native full-stack template that gets you from idea to production in 4 minutes**
+> **Everything you need to build and ship AI products. From prototype to production in minutes.**
 
 🚀 **NEW: CLI Tool Available!** Skip setup entirely with our command-line interface.
 
@@ -39,7 +39,7 @@ cd my-app && prompt-stack dev
 
 ### Option 2: Manual Setup
 ```bash
-git clone https://github.com/your-org/prompt-stack.git
+git clone https://github.com/prompt-stack/prompt-stack.git
 cd prompt-stack/template
 ./setup.sh && make dev
 ```
@@ -86,4 +86,4 @@ MIT License - see [LICENSE](./template/LICENSE) for details.
 
 ---
 
-**Built for developers who want to ship fast** 🚀
+**Your AI Development Studio for building the future** 🚀

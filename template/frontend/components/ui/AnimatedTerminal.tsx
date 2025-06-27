@@ -11,7 +11,7 @@ interface Command {
 
 const commands: Command[] = [
   { 
-    text: '$ git clone https://github.com/rudijetson/prompt-stack',
+    text: '$ git clone https://github.com/prompt-stack/prompt-stack',
     output: 'Cloning into \'prompt-stack\'...',
     delay: 1000
   },

@@ -1,4 +1,4 @@
-# Prompt-Stack
+# prompt-stack: The AI Development Studio
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://www.docker.com/)
@@ -6,7 +6,7 @@
 [![Next.js](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-latest-009688.svg)](https://fastapi.tiangolo.com/)
 
-**The Rails of AI Development** - Ship production-ready AI applications in 18 minutes, not months.
+**Everything you need to build and ship AI products. From prototype to production in minutes.**
 
 🚀 **Real-World Tested**: 100% setup success rate with live users  
 🔒 **Enterprise Security**: Bank-level authentication and data protection  
@@ -17,8 +17,8 @@
 
 ```bash
 # 1. Clone and setup (instant demo mode)
-git clone https://github.com/rudijetson/prompt-stack-temp.git
-cd prompt-stack-temp
+git clone https://github.com/prompt-stack/prompt-stack.git
+cd prompt-stack/template
 ./setup.sh
 
 # 2. Visit your app (already working!)
