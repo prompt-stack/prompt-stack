@@ -1,6 +1,6 @@
 {
-  "name": "prompt-stack-cli",
-  "version": "1.0.0",
+  "name": "@prompt-stack/prompt-stack",
+  "version": "1.0.1",
   "description": "CLI for prompt-stack: The AI Development Studio. Everything you need to build and ship AI products.",
   "main": "index.js",
   "bin": {

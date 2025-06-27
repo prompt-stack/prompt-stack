@@ -5,7 +5,7 @@ The command-line interface for creating and managing Prompt-Stack applications.
 ## Installation
 
 ```bash
-npm install -g prompt-stack-cli
+npm install -g @prompt-stack/prompt-stack
 ```
 
 ## Usage

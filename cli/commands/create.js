@@ -6,7 +6,6 @@ const ora = require('ora');
 
 async function createCommand(name, options) {
   const projectPath = path.resolve(name);
-  const templatePath = path.join(__dirname, '../../studio');
 
   console.log(chalk.blue(`🚀 Creating new Prompt-Stack project: ${chalk.bold(name)}`));
   console.log('');
@@ -17,22 +16,37 @@ async function createCommand(name, options) {
     process.exit(1);
   }
 
-  // Check if studio template exists
-  if (!fs.existsSync(templatePath)) {
-    console.error(chalk.red('❌ Studio template not found. Make sure you\'re running from the correct directory.'));
-    process.exit(1);
-  }
-
-  const spinner = ora('Copying studio files...').start();
+  const spinner = ora('Downloading prompt-stack template...').start();
 
   try {
-    // Copy studio to new directory
-    await fs.copy(templatePath, projectPath);
-    spinner.succeed('Studio files copied');
+    // Clone the studio template from GitHub
+    const cloneResult = exec(`git clone --depth 1 --filter=blob:none --sparse https://github.com/prompt-stack/prompt-stack.git "${projectPath}"`, { silent: true });
+    
+    if (cloneResult.code !== 0) {
+      spinner.fail('Failed to download template');
+      console.error(chalk.red('Error cloning repository:'));
+      console.error(cloneResult.stderr);
+      process.exit(1);
+    }
+
+    // Sparse checkout only the studio folder
+    const sparseResult = exec(`cd "${projectPath}" && git sparse-checkout set studio && git checkout`, { silent: true });
+    
+    if (sparseResult.code !== 0) {
+      spinner.fail('Failed to extract template');
+      console.error(chalk.red('Error setting up template:'));
+      console.error(sparseResult.stderr);
+      process.exit(1);
+    }
+
+    // Move studio contents to root and clean up
+    const moveResult = exec(`cd "${projectPath}" && mv studio/* . && mv studio/.* . 2>/dev/null || true && rm -rf studio .git`, { silent: true });
+    
+    spinner.succeed('Template downloaded and extracted');
 
     // Run setup script
     const setupSpinner = ora('Running initial setup...').start();
-    const setupResult = exec(`cd ${projectPath} && ./setup.sh`, { silent: true });
+    const setupResult = exec(`cd "${projectPath}" && ./setup.sh`, { silent: true });
     
     if (setupResult.code !== 0) {
       setupSpinner.fail('Setup failed');
