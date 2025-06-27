@@ -40,7 +40,7 @@ cd my-app && prompt-stack dev
 ### Option 2: Manual Setup
 ```bash
 git clone https://github.com/prompt-stack/prompt-stack.git
-cd prompt-stack/template
+cd prompt-stack/studio
 ./setup.sh && make dev
 ```
 
@@ -71,18 +71,18 @@ cd prompt-stack/template
 
 ## 📚 Documentation
 
-- [Getting Started](./template/docs/GETTING_STARTED.md)
-- [Production Setup Guide](./template/PRODUCTION_SETUP_GUIDE.md)
-- [Architecture Overview](./template/docs/ARCHITECTURE_OVERVIEW.md)
-- [Development Patterns](./template/docs/DEVELOPMENT_PATTERNS.md)
+- [Getting Started](./studio/docs/GETTING_STARTED.md)
+- [Production Setup Guide](./studio/PRODUCTION_SETUP_GUIDE.md)
+- [Architecture Overview](./studio/docs/ARCHITECTURE_OVERVIEW.md)
+- [Development Patterns](./studio/docs/DEVELOPMENT_PATTERNS.md)
 
 ## 🤝 Contributing
 
-See [CONTRIBUTING.md](./template/CONTRIBUTING.md) for development setup and contribution guidelines.
+See [CONTRIBUTING.md](./studio/CONTRIBUTING.md) for development setup and contribution guidelines.
 
 ## 📄 License
 
-MIT License - see [LICENSE](./template/LICENSE) for details.
+MIT License - see [LICENSE](./studio/LICENSE) for details.
 
 ---
 

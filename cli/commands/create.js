@@ -6,7 +6,7 @@ const ora = require('ora');
 
 async function createCommand(name, options) {
   const projectPath = path.resolve(name);
-  const templatePath = path.join(__dirname, '../../template');
+  const templatePath = path.join(__dirname, '../../studio');
 
   console.log(chalk.blue(`🚀 Creating new Prompt-Stack project: ${chalk.bold(name)}`));
   console.log('');
@@ -17,18 +17,18 @@ async function createCommand(name, options) {
     process.exit(1);
   }
 
-  // Check if template exists
+  // Check if studio template exists
   if (!fs.existsSync(templatePath)) {
-    console.error(chalk.red('❌ Template not found. Make sure you\'re running from the correct directory.'));
+    console.error(chalk.red('❌ Studio template not found. Make sure you\'re running from the correct directory.'));
     process.exit(1);
   }
 
-  const spinner = ora('Copying template files...').start();
+  const spinner = ora('Copying studio files...').start();
 
   try {
-    // Copy template to new directory
+    // Copy studio to new directory
     await fs.copy(templatePath, projectPath);
-    spinner.succeed('Template files copied');
+    spinner.succeed('Studio files copied');
 
     // Run setup script
     const setupSpinner = ora('Running initial setup...').start();
