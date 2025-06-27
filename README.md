@@ -6,8 +6,8 @@ AI-friendly full-stack template with authentication, payments, and vector search
 
 ```bash
 # 1. Clone and setup (instant demo mode)
-git clone https://github.com/yourusername/prompt-stack.git
-cd prompt-stack
+git clone https://github.com/rudijetson/prompt-stack-temp.git
+cd prompt-stack-temp
 ./setup.sh
 
 # 2. Visit your app (already working!)
