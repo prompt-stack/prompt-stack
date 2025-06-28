@@ -1,6 +1,7 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import EmailStr
 from typing import Optional
 from datetime import datetime
+from app.models.base import BaseModel
 
 
 class UserProfile(BaseModel):
