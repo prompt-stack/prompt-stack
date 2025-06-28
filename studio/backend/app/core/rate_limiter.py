@@ -13,8 +13,11 @@ limiter = Limiter(
     storage_uri="memory://"
 )
 
-# Specific limits for different endpoint types
-auth_limiter = limiter.limit("3 per minute")   # Strict for auth
-admin_limiter = limiter.limit("10 per minute") # Admin operations  
-api_limiter = limiter.limit("30 per minute")   # General API
-upload_limiter = limiter.limit("5 per hour")   # File uploads
+# Rate limit decorators to use on specific endpoints
+# Usage: @limiter.limit("10 per minute")
+# 
+# Common limits:
+# - Auth endpoints: "3 per minute"
+# - Admin operations: "10 per minute"
+# - General API: "30 per minute"
+# - File uploads: "5 per hour"
