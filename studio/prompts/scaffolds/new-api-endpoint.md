@@ -1,23 +1,81 @@
 # Scaffold: New API Endpoint
 
-## Prompt Template
+## Copy-Paste Template
+
+### Step 1: Create endpoint file
+Create `backend/app/api/endpoints/[ENDPOINT_NAME].py`:
+
+```python
+from fastapi import APIRouter, Depends, HTTPException
+from pydantic import BaseModel
+from typing import Optional
+
+from app.api.deps import get_current_user, get_supabase_client
+from app.models.user import User
+from app.core.response import create_response
+
+router = APIRouter()
+
+# Request/Response models
+class CreateItemRequest(BaseModel):
+    name: str
+    description: Optional[str] = None
+
+class ItemResponse(BaseModel):
+    id: str
+    name: str
+    description: Optional[str] = None
+    user_id: str
+
+@router.get("/")
+async def list_items(
+    current_user: User = Depends(get_current_user),
+    supabase = Depends(get_supabase_client)
+):
+    """List all items for current user"""
+    try:
+        result = supabase.table("[ENDPOINT_NAME]") \
+            .select("*") \
+            .eq("user_id", current_user.id) \
+            .execute()
+        
+        return create_response(data=result.data)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/")
+async def create_item(
+    request: CreateItemRequest,
+    current_user: User = Depends(get_current_user),
+    supabase = Depends(get_supabase_client)
+):
+    """Create a new item"""
+    try:
+        result = supabase.table("[ENDPOINT_NAME]") \
+            .insert({
+                "name": request.name,
+                "description": request.description,
+                "user_id": current_user.id
+            }) \
+            .execute()
+        
+        return create_response(data=result.data[0])
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 ```
-You are my lead developer. Create a new REST API endpoint at /api/[ENDPOINT_NAME] in the Prompt-Stack backend.
 
-Requirements:
-1. Create file: backend/app/api/endpoints/[ENDPOINT_NAME].py
-2. Add router to backend/app/api/router.py
-3. Include proper authentication using get_current_user dependency
-4. Add Pydantic models for request/response validation
-5. Follow existing patterns from other endpoints
+### Step 2: Add to router
+Edit `backend/app/api/router.py`:
 
-Endpoint should include:
-- Proper HTTP methods (GET, POST, PUT, DELETE as needed)
-- Input validation with Pydantic models
-- Authentication and authorization checks
-- Error handling with HTTPException
-- Standardized response format using create_response()
-- Database operations using Supabase client
+```python
+from app.api.endpoints import [ENDPOINT_NAME]
+
+api_router.include_router(
+    [ENDPOINT_NAME].router, 
+    prefix="/[ENDPOINT_NAME]", 
+    tags=["[ENDPOINT_NAME]"]
+)
+```
 - Async/await for all operations
 
 Follow these patterns:

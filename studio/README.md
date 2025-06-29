@@ -13,6 +13,12 @@
 🤖 **AI-Native**: Built for OpenAI, Anthropic, Gemini, and DeepSeek  
 ⚡ **Instant Demo**: Works without any API keys or configuration
 
+## 🤖 For AI Assistants
+
+- **[LLM_NAVIGATION.md](./LLM_NAVIGATION.md)** - Quick navigation and actions
+- **[CLAUDE.md](./CLAUDE.md)** - Operating manual for AI assistants
+- **[AI_ASSISTANT_GUIDE.md](./AI_ASSISTANT_GUIDE.md)** - Common prompts and patterns
+
 ## 🚀 Quick Start
 
 ```bash
@@ -158,15 +164,21 @@ curl http://localhost:8000/health/features | jq
 
 ## 🚀 Deployment
 
-### Frontend (Vercel)
+Ready to deploy in 10 minutes:
+
 ```bash
+# 1. Prepare for Railway (creates Nixpacks files)
+./scripts/setup-railway.sh
+
+# 2. Deploy backend to Railway
+# Go to railway.app → New Project → Deploy from GitHub
+# Railway auto-detects Python and deploys with Nixpacks
+
+# 3. Deploy frontend to Vercel
 cd frontend && vercel --prod
 ```
 
-### Backend (Railway/Render)
-```bash
-railway up  # or use render.yaml
-```
+See [Deployment Quick Start](docs/DEPLOYMENT_QUICKSTART.md) for detailed instructions.
 
 ## 📖 Documentation
 

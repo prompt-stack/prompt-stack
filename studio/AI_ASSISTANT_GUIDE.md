@@ -1,18 +1,58 @@
-# AI Guide: Prompt-Stack
+# AI Assistant Guide: Prompt-Stack
 
-## Repository Overview
-This is a production-ready, AI-native full-stack template featuring:
-- **Multi-LLM Support**: OpenAI, Anthropic, Gemini, DeepSeek
-- **Enterprise Auth**: Supabase + JWT + Role-based access control
-- **AI-Native Workflow**: Automated code auditing, scaffolds, quality gates
-- **Real-time Setup**: ~20 minutes from clone to fully functional AI app
+## 🤖 LLM Navigation Map
 
-## 🎯 Real-World Setup Experience
-Based on actual user testing, expect this workflow:
-1. **Clone + Demo**: 3-5 minutes → Working app with mock data
-2. **Add Supabase**: 5-10 minutes → Real auth + database
-3. **Add LLM Providers**: 5 minutes → Live AI integration
-4. **Total Time**: ~20 minutes to production-ready AI application
+### Critical Paths
+```
+User Request → Identify Location → Make Changes → Verify
+│
+├── "Build a dashboard" → frontend/app/(authenticated)/dashboard/
+├── "Add API endpoint" → backend/app/api/endpoints/
+├── "Fix authentication" → frontend/components/providers/auth-provider.tsx
+└── "Deploy to Railway" → ./scripts/setup-railway.sh → Follow Nixpacks path
+```
+
+### File Location Quick Reference
+```
+frontend/
+├── app/                     # BUILD USER FEATURES HERE
+│   ├── (authenticated)/     # Protected pages go here
+│   └── page.tsx            # Homepage
+├── components/             # Reusable components
+└── services/              # API client functions
+
+backend/
+├── app/
+│   ├── api/endpoints/     # API routes
+│   ├── services/         # Business logic
+│   └── core/config.py   # Environment config
+```
+
+## 🎯 Common User Requests & Exact Actions
+
+### "Create a new page"
+```bash
+# Protected page:
+Create: frontend/app/(authenticated)/[page-name]/page.tsx
+
+# Public page:
+Create: frontend/app/[page-name]/page.tsx
+```
+
+### "Add new API endpoint"
+```bash
+1. Create: backend/app/api/endpoints/[endpoint].py
+2. Edit: backend/app/api/router.py
+   Add: api_router.include_router([endpoint].router, prefix="/[endpoint]", tags=["[endpoint]"])
+```
+
+### "Deploy the app"
+```bash
+1. Run: ./scripts/setup-railway.sh
+2. Git push
+3. Railway auto-deploys
+4. Deploy frontend: cd frontend && vercel --prod
+```
 
 ## Quick Prompts
 

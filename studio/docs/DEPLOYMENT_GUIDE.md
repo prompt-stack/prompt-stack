@@ -35,7 +35,7 @@ GEMINI_API_KEY=your-gemini-key
 DEEPSEEK_API_KEY=sk-your-deepseek-key
 
 # ✅ Security
-CORS_ORIGINS=["https://your-domain.com"]
+CORS_ORIGINS=https://your-domain.com  # No brackets in production!
 FRONTEND_URL=https://your-domain.com
 
 # 🔄 Optional features

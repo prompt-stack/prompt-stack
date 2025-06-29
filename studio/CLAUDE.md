@@ -1,23 +1,38 @@
-# CLAUDE.md
+# CLAUDE.md - AI Assistant Operating Manual
 
-This file helps AI assistants understand and work with this codebase effectively.
+## 🎯 INSTANT ACTION MATRIX
 
-## 🚨 CRITICAL: Where to Build User Features
+| User Says | You Do | Location |
+|-----------|--------|----------|
+| "Create a dashboard" | Build immediately | `frontend/app/(authenticated)/dashboard/page.tsx` |
+| "Add user profile" | Build immediately | `frontend/app/(authenticated)/profile/page.tsx` |
+| "Make a landing page" | Build immediately | `frontend/app/page.tsx` |
+| "Add API endpoint" | Create endpoint + router | `backend/app/api/endpoints/[name].py` |
+| "Deploy this" | Run setup-railway.sh | Then: git push + vercel |
+| "Fix TypeScript error" | Add type or ignore | Don't ask, just fix |
 
-**When a user asks to build ANYTHING (dashboard, forms, pages, etc.):**
-1. **BUILD IN**: `frontend/app/` (NOT in `frontend/app/prompt-stack/`)
-2. **USE**: The existing `(authenticated)` wrapper for protected pages
-3. **ASSUME**: Demo mode is fine - don't interrupt to ask for API keys
+## 🚨 CRITICAL RULES FOR AI ASSISTANTS
 
-### Examples:
-- User: "Create a dashboard" → Build at: `frontend/app/dashboard/page.tsx`
-- User: "Add user profile" → Build at: `frontend/app/(authenticated)/profile/page.tsx`
-- User: "Make a landing page" → Build at: `frontend/app/page.tsx`
+### Rule #1: BUILD FIRST, ASK LATER
+- User says "build X" → Start building immediately
+- Default to demo mode (it works!)
+- Only ask questions if you hit an actual error
 
-### NEVER:
-- Don't build in `/prompt-stack/` - that's just demos
-- Don't ask for setup/credentials unless they specifically ask
-- Don't suggest running setup scripts unless there's an error
+### Rule #2: KNOW YOUR LOCATIONS
+```
+frontend/app/                    ← USER FEATURES GO HERE
+├── (authenticated)/            ← Protected pages (auto-requires login)
+├── api/                       ← API routes (Next.js)
+└── [page-name]/              ← Public pages
+
+frontend/app/prompt-stack/      ← NEVER BUILD HERE (demo only)
+```
+
+### Rule #3: COMMON FIXES (DO AUTOMATICALLY)
+- **TypeScript error?** → Add `: any` or set `ignoreBuildErrors: true`
+- **Missing import?** → Check `frontend/components/ui/`
+- **CORS error?** → Remove brackets from CORS_ORIGINS in production
+- **Auth error?** → User needs to log out and back in after adding keys
 
 ## 🎯 Quick Reference for Common Requests
 
@@ -84,7 +99,8 @@ make logs-frontend      # Frontend logs only
 
 # Testing & Diagnostics
 ./scripts/test-api-simple.sh        # Quick API test
-./scripts/diagnose.sh               # 🔍 NEW! Diagnose common issues
+./scripts/diagnose.sh               # 🔍 Diagnose common issues
+./scripts/setup-railway.sh          # Prepare for Railway deployment
 curl http://localhost:8000/docs     # API documentation
 curl http://localhost:8000/health/detailed | jq  # System status
 curl http://localhost:8000/health/features | jq  # Feature configuration
@@ -170,7 +186,8 @@ IMPORTANT: Field names must match `Settings` class in `backend/app/core/config.p
 # Core settings
 ENVIRONMENT=development
 DEMO_MODE=auto
-CORS_ORIGINS=["http://localhost:3000", "http://localhost:3001"]
+CORS_ORIGINS=["http://localhost:3000", "http://localhost:3001"]  # For local dev
+# CORS_ORIGINS=https://your-app.vercel.app  # For production (no brackets!)
 FRONTEND_URL=http://localhost:3000
 
 # Optional services (leave empty for demo mode)

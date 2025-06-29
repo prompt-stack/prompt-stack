@@ -26,9 +26,11 @@ Quick reference for all scripts in Prompt-Stack.
 - **`troubleshoot.sh`** - Interactive troubleshooting guide
 
 ## 🚢 Deployment
+- **`setup-railway.sh`** - Prepare for Railway deployment (creates Nixpacks files)
 - **`deploy.sh`** - Deploy both frontend and backend
 - **`deploy-frontend.sh`** - Deploy frontend to Vercel
 - **`deploy-backend.sh`** - Deploy backend (Railway/Render/Fly)
+- **`cleanup-deployment.sh`** - Remove unnecessary deployment files
 
 ## 🗄️ Database
 - **`../supabase/setup-database.sh`** - Database migrations and setup

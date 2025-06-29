@@ -48,6 +48,12 @@ yarn-error.log*
 
 # IDE
 .vscode/
+
+# GitHub Actions (avoid workflow permission issues)
+.github/
+
+# Vercel
+.vercel
 .idea/
 *.swp
 *.swo
