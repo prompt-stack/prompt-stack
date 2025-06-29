@@ -17,7 +17,9 @@ export function getApiUrl(): string {
  */
 export function getApiEndpoint(path: string): string {
   const baseUrl = getApiUrl()
+  // Remove trailing slash from base URL to avoid double slashes
+  const cleanBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl
   // Ensure path starts with /
   const normalizedPath = path.startsWith('/') ? path : `/${path}`
-  return `${baseUrl}${normalizedPath}`
+  return `${cleanBaseUrl}${normalizedPath}`
 }

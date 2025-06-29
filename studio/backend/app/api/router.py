@@ -18,7 +18,7 @@ TO ADD NEW ENDPOINTS:
 
 from fastapi import APIRouter
 from app.core.config import settings
-from app.api.endpoints import auth, llm, vectordb, dev, upload, health, payments, system, admin
+from app.api.endpoints import auth, llm, vectordb, dev, upload, health, payments, system, admin, deployment
 
 api_router = APIRouter()
 
@@ -38,6 +38,9 @@ api_router.include_router(upload.router, prefix="/upload", tags=["File Upload"])
 api_router.include_router(payments.router, prefix="/payments", tags=["Payments"])
 
 # Full payment functionality disabled - see docs/PAYMENT_INTEGRATION.md to enable
+
+# Deployment status endpoint
+api_router.include_router(deployment.router, prefix="/deployment", tags=["Deployment"])
 
 # Development endpoints - only in dev mode
 if settings.ENVIRONMENT == "development":

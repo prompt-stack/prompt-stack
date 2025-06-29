@@ -50,7 +50,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline'", // Required for Tailwind
               "img-src 'self' data: https:",
               "font-src 'self'",
-              "connect-src 'self' http://localhost:8000 https://nepcpxunchnowolbcsgu.supabase.co https://api.openai.com https://api.anthropic.com https://generativelanguage.googleapis.com https://api.deepseek.com",
+              `connect-src 'self' ${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'} ${process.env.NEXT_PUBLIC_SUPABASE_URL || ''} https://api.openai.com https://api.anthropic.com https://generativelanguage.googleapis.com https://api.deepseek.com`,
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'"

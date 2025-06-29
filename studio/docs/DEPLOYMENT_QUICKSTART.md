@@ -40,12 +40,16 @@
 
 3. **Add Environment Variables**:
    - Click on your service → "Variables" tab
+   - **IMPORTANT**: Set variables in Railway dashboard, NOT via CLI (URLs get truncated)
    - Click "Raw Editor" and paste:
    ```env
    # Copy ALL variables from your backend/.env file
    # Plus these Railway-specific ones:
    ENVIRONMENT=production
    PORT=8000
+   
+   # ⚠️ KNOWN ISSUE: If SUPABASE_URL appears as just "https://", 
+   # set it manually in the dashboard (not CLI)
    
    # After deploying frontend, add:
    FRONTEND_URL=https://your-app.vercel.app
@@ -68,6 +72,7 @@
 
 2. **Deploy to Vercel**:
    ```bash
+   cd frontend  # ⚠️ IMPORTANT: Must be in frontend directory!
    npx vercel --prod
    # Follow prompts, accept defaults
    ```
