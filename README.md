@@ -1,12 +1,31 @@
-# prompt-stack: Professional Vibe Coding Studio
+# prompt-stack: The AI Development Studio
+
+<div align="center">
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![npm version](https://img.shields.io/npm/v/@prompt-stack/prompt-stack.svg)](https://www.npmjs.com/package/@prompt-stack/prompt-stack)
+[![npm downloads](https://img.shields.io/npm/dt/@prompt-stack/prompt-stack.svg)](https://www.npmjs.com/package/@prompt-stack/prompt-stack)
+[![GitHub Stars](https://img.shields.io/github/stars/prompt-stack/prompt-stack.svg)](https://github.com/prompt-stack/prompt-stack/stargazers)
+
+[![Next.js](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-latest-009688.svg)](https://fastapi.tiangolo.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
+
+[![Railway](https://img.shields.io/badge/Deploy%20on-Railway-purple.svg)](https://railway.app/)
+[![Vercel](https://img.shields.io/badge/Deploy%20on-Vercel-black.svg)](https://vercel.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
+[![AI Native](https://img.shields.io/badge/AI-Native-green.svg)](https://github.com/prompt-stack/prompt-stack)
+
+</div>
 
 > **Everything you need to build and ship AI products. From prototype to production in minutes.**
 
-🚀 **NEW: CLI Tool Available!** Skip setup entirely with our command-line interface.
+## 🚀 Quick Start with CLI
 
 ```bash
 # Install CLI
-npm install -g prompt-stack-cli
+npm install -g @prompt-stack/prompt-stack
 
 # Create new project
 prompt-stack create my-saas-app
