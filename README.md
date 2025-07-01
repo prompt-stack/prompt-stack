@@ -1,4 +1,4 @@
-# Prompt Stack CLI
+# prompt-stack
 
 🚀 **Turn Your Prompts Into Products** - The official CLI for creating AI-powered applications.
 
