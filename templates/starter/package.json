@@ -1,0 +1,21 @@
+{
+  "name": "prompt-stack-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev:frontend",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && uvicorn app.main:app --reload --port 8000",
+    "dev:all": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "build": "cd frontend && npm run build",
+    "setup": "sh scripts/setup.sh",
+    "install:all": "npm install && cd frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "description": "Prompt Stack Starter - Turn Your Prompts Into Products",
+  "keywords": ["ai", "nextjs", "fastapi", "supabase", "prompt-engineering"],
+  "author": "@hoffdigital",
+  "license": "MIT"
+}

@@ -1,0 +1,12 @@
+fastapi==0.109.0
+uvicorn[standard]==0.25.0
+python-dotenv==1.0.0
+pydantic==2.5.3
+
+# Note: The full codebase includes:
+# - OpenAI, Anthropic, Google AI SDK
+# - Supabase Python client
+# - Redis for caching
+# - Stripe & LemonSqueezy SDKs
+# - Rate limiting libraries
+# - And much more...

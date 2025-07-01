@@ -1,0 +1,42 @@
+{
+  "name": "@prompt-stack/cli",
+  "version": "1.0.0",
+  "description": "CLI for creating Prompt Stack AI applications",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "prompt-stack": "./bin/prompt-stack.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ai",
+    "cli",
+    "prompt-stack",
+    "openai",
+    "anthropic",
+    "nextjs",
+    "fastapi"
+  ],
+  "author": "Brandon Z. Hoff <brandon@promptstack.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "inquirer": "^9.2.12",
+    "ora": "^7.0.1",
+    "fs-extra": "^11.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prompt-stack/prompt-stack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prompt-stack/prompt-stack/issues"
+  },
+  "homepage": "https://promptstack.com",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
